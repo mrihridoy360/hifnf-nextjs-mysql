@@ -1,0 +1,56 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # ডোমেইন রিডাইরেকশন (www থেকে non-www)
+  RewriteCond %{HTTP_HOST} ^www\.new\.hifnf\.com [NC]
+  RewriteRule ^(.*)$ https://new.hifnf.com/$1 [L,R=301]
+
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Node.js অ্যাপ্লিকেশনে সমস্ত রিকোয়েস্ট পাঠান
+  RewriteRule ^$ http://127.0.0.1:3000/ [P,L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ http://127.0.0.1:3000/$1 [P,L]
+</IfModule>
+
+# প্রক্সি সেটিংস
+<IfModule mod_proxy.c>
+  ProxyRequests Off
+  ProxyPreserveHost On
+  ProxyVia Full
+
+  <IfModule mod_proxy_http.c>
+    ProxyPass / http://127.0.0.1:3000/
+    ProxyPassReverse / http://127.0.0.1:3000/
+    # টাইমআউট বাড়ান
+    ProxyTimeout 600
+  </IfModule>
+</IfModule>
+
+# CORS হেডার
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "https://new.hifnf.com"
+  Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+  Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+</IfModule>
+
+# কম্প্রেশন এনাবল করুন
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# ক্যাশিং এনাবল করুন
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+</IfModule>
