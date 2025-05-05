@@ -5,7 +5,7 @@ const compression = require('compression');
 
 // Set memory limit for Node.js process
 if (!process.env.NODE_OPTIONS) {
-  process.env.NODE_OPTIONS = '--max-old-space-size=128';
+  process.env.NODE_OPTIONS = '--max-old-space-size=1024';
 }
 
 // Optimize memory usage
@@ -46,16 +46,9 @@ app.prepare().then(() => {
   // Enable compression
   server.use(compression());
 
-  // Set cookie parser
-  server.use((req, res, next) => {
-    // Log cookies for debugging
-    console.log('Request cookies:', req.headers.cookie);
-    next();
-  });
-
   // Set CORS headers
   server.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', 'https://gaanlagbe.com');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
