@@ -43,11 +43,6 @@ export async function middleware(request: NextRequest) {
 // Configure which paths the middleware should run on
 export const config = {
   matcher: [
-    '/profile/:path*',
-    '/messages/:path*',
-    '/friends/:path*',
-    '/notifications/:path*',
-    '/settings/:path*',
-    '/auth/:path*',
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };

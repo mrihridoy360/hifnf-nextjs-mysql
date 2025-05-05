@@ -41,12 +41,14 @@ function SignInForm() {
     setLoading(true);
 
     try {
+      console.log('Attempting to sign in with:', formData.email);
       const result = await signIn('credentials', {
         redirect: false,
         email: formData.email,
         password: formData.password,
         callbackUrl: '/',
       });
+      console.log('Sign in result:', result);
 
       if (result?.error) {
         setError('Invalid email or password');
