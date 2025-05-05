@@ -3,8 +3,8 @@
   RewriteBase /
 
   # ডোমেইন রিডাইরেকশন (www থেকে non-www)
-  RewriteCond %{HTTP_HOST} ^www\.new\.hifnf\.com [NC]
-  RewriteRule ^(.*)$ https://new.hifnf.com/$1 [L,R=301]
+  RewriteCond %{HTTP_HOST} ^www\.gaanlagbe\.com [NC]
+  RewriteRule ^(.*)$ https://gaanlagbe.com/$1 [L,R=301]
 
   # Force HTTPS
   RewriteCond %{HTTPS} off
@@ -33,7 +33,7 @@
 
 # CORS হেডার
 <IfModule mod_headers.c>
-  Header set Access-Control-Allow-Origin "https://new.hifnf.com"
+  Header set Access-Control-Allow-Origin "https://gaanlagbe.com"
   Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
   Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization"
 </IfModule>

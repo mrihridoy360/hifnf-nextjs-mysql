@@ -1,8 +1,8 @@
 {
-  "name": "facebook-clone",
+  "name": "gaanlagbe",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://new.hifnf.com",
+  "homepage": "https://gaanlagbe.com",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

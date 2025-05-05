@@ -2,7 +2,7 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    domains: ['via.placeholder.com', 'localhost', 'new.hifnf.com'],
+    domains: ['via.placeholder.com', 'localhost', 'gaanlagbe.com'],
     remotePatterns: [
       {
         protocol: 'http',
@@ -12,7 +12,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'new.hifnf.com',
+        hostname: 'gaanlagbe.com',
         pathname: '/uploads/**',
       },
     ],
