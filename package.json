@@ -5,11 +5,12 @@
   "homepage": "https://gaanlagbe.com",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "cross-env NODE_ENV=production node express-server.js",
-    "start:win": "set NODE_ENV=production && node express-server.js",
+    "build": "cross-env NODE_OPTIONS='--max-old-space-size=1024 --initial-heap-size=512 --max-semi-space-size=128 --wasm-memory-size-mb=512' next build",
+    "start": "cross-env NODE_ENV=production NODE_OPTIONS='--max-old-space-size=1024 --initial-heap-size=512 --max-semi-space-size=128 --wasm-memory-size-mb=512' node express-server.js",
+    "start:win": "set NODE_ENV=production && set NODE_OPTIONS=--max-old-space-size=1024 --initial-heap-size=512 --max-semi-space-size=128 --wasm-memory-size-mb=512 && node express-server.js",
     "lint": "next lint",
-    "setup": "node setup-database.js"
+    "setup": "node setup-database.js",
+    "clean": "rm -rf .next"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",

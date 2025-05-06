@@ -5,7 +5,7 @@ const compression = require('compression');
 
 // Set memory limit for Node.js process
 if (!process.env.NODE_OPTIONS) {
-  process.env.NODE_OPTIONS = '--max-old-space-size=1024';
+  process.env.NODE_OPTIONS = '--max-old-space-size=1024 --initial-heap-size=512 --max-semi-space-size=128 --wasm-memory-size-mb=512';
 }
 
 // Optimize memory usage

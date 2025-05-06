@@ -36,14 +36,17 @@ const nextConfig = {
   crossOrigin: 'anonymous',
   // Memory optimization settings
   experimental: {
-    // Reduce memory usage - removing this as it requires critters package
-    // optimizeCss: true,
     // Disable JIT compilation to reduce memory usage
-    forceSwcTransforms: false,
+    forceSwcTransforms: true,
+    // Optimize memory usage
+    optimizePackageImports: ['react-icons', '@heroicons/react'],
+    // Reduce memory usage during build
+    webpackBuildWorker: false,
   },
-  // Note: swcMinify option removed as it's not supported in Next.js 15.3.1
   // Reduce memory usage during runtime
   reactStrictMode: false,
+  // Minimize output size
+  compress: true,
 };
 
 module.exports = nextConfig;
