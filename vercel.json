@@ -4,11 +4,14 @@
   "framework": "nextjs",
   "regions": ["sin1"],
   "env": {
-    "MYSQL_HOST": "MYSQL_HOST",
-    "MYSQL_USER": "MYSQL_USER",
-    "MYSQL_PASSWORD": "MYSQL_PASSWORD",
-    "MYSQL_DATABASE": "MYSQL_DATABASE",
-    "NEXTAUTH_SECRET": "NEXTAUTH_SECRET",
+    "MYSQL_HOST": "inpro2.fcomet.com",
+    "MYSQL_PORT": "3306",
+    "MYSQL_USER": "unlifyc2_newhifnfnextjs",
+    "MYSQL_PASSWORD": "4f}hkcXU55U^",
+    "MYSQL_DATABASE": "unlifyc2_facebook_clone",
+    "NEXTAUTH_SECRET": "this-is-a-secret-key-for-facebook-clone-app",
+    "NEXTAUTH_URL": "https://hifnf-nextjs-mysql.vercel.app",
+    "NEXT_PUBLIC_BASE_URL": "https://hifnf-nextjs-mysql.vercel.app",
     "UPLOAD_DIR": "public/uploads"
   }
 }

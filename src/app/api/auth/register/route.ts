@@ -5,15 +5,37 @@ import { executeQuery } from '@/lib/db';
 
 export async function POST(req: NextRequest) {
   try {
-    const { firstName, lastName, username, email, password, dateOfBirth } = await req.json();
+    console.log('Registration API called');
+
+    const body = await req.json();
+    console.log('Registration request body:', {
+      ...body,
+      password: body.password ? '[REDACTED]' : undefined
+    });
+
+    const { firstName, lastName, username, email, password, dateOfBirth } = body;
 
     // Validate input
     if (!firstName || !lastName || !username || !email || !password || !dateOfBirth) {
+      console.log('Missing required fields:', {
+        firstName: !!firstName,
+        lastName: !!lastName,
+        username: !!username,
+        email: !!email,
+        password: !!password,
+        dateOfBirth: !!dateOfBirth
+      });
       return NextResponse.json(
         { message: 'All fields are required' },
         { status: 400 }
       );
     }
+
+    console.log('Database connection info:', {
+      host: process.env.MYSQL_HOST,
+      user: process.env.MYSQL_USER,
+      database: process.env.MYSQL_DATABASE
+    });
 
     // Check if email already exists
     const existingEmailUsers = await executeQuery<any[]>({
@@ -61,8 +83,14 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     console.error('Registration error:', error);
+    // Log more detailed error information
+    if (error instanceof Error) {
+      console.error('Error name:', error.name);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
     return NextResponse.json(
-      { message: 'Internal server error' },
+      { message: 'Internal server error', error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }

@@ -13,26 +13,41 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
+          console.log('Missing credentials');
           return null;
         }
 
         try {
+          console.log('Attempting to authenticate user:', credentials.email);
+          console.log('Database connection info:', {
+            host: process.env.MYSQL_HOST,
+            user: process.env.MYSQL_USER,
+            database: process.env.MYSQL_DATABASE
+          });
+
           const users = await executeQuery<any[]>({
             query: 'SELECT * FROM users WHERE email = ?',
             values: [credentials.email]
           });
 
+          console.log('Users found:', users.length);
+
           if (users.length === 0) {
+            console.log('No user found with email:', credentials.email);
             return null;
           }
 
           const user = users[0];
+          console.log('User found, checking password');
+
           const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
 
           if (!isPasswordValid) {
+            console.log('Invalid password');
             return null;
           }
 
+          console.log('Authentication successful');
           return {
             id: user.id,
             name: `${user.first_name} ${user.last_name}`,
@@ -42,6 +57,12 @@ export const authOptions: NextAuthOptions = {
           };
         } catch (error) {
           console.error('Authentication error:', error);
+          // Log more detailed error information
+          if (error instanceof Error) {
+            console.error('Error name:', error.name);
+            console.error('Error message:', error.message);
+            console.error('Error stack:', error.stack);
+          }
           return null;
         }
       }
