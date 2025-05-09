@@ -1,11 +1,9 @@
 {
-  "/api/posts/route": "app/api/posts/route.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
   "/api/friends/requests/route": "app/api/friends/requests/route.js",
+  "/api/posts/route": "app/api/posts/route.js",
   "/api/users/[username]/route": "app/api/users/[username]/route.js",
   "/api/friends/suggestions/route": "app/api/friends/suggestions/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js",
-  "/friends/page": "app/friends/page.js"
+  "/api/posts/[id]/route": "app/api/posts/[id]/route.js",
+  "/page": "app/page.js"
 }
