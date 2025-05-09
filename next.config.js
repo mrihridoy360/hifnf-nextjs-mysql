@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  // Using default output mode for Vercel deployment to support API routes
   images: {
     domains: ['via.placeholder.com', 'localhost', 'gaanlagbe.com'],
     remotePatterns: [
@@ -30,18 +30,10 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-  // Domain configuration
-  assetPrefix: process.env.NODE_ENV === 'production' ? 'https://gaanlagbe.com' : '',
-  basePath: '',
-  crossOrigin: 'anonymous',
-  // Memory optimization settings
+  // Memory optimization settings for Vercel
   experimental: {
-    // Disable JIT compilation to reduce memory usage
-    forceSwcTransforms: true,
     // Optimize memory usage
     optimizePackageImports: ['react-icons', '@heroicons/react'],
-    // Reduce memory usage during build
-    webpackBuildWorker: false,
   },
   // Reduce memory usage during runtime
   reactStrictMode: false,
